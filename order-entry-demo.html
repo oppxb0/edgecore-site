@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Entry — AI Extraction Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a18;
+    --ink-mid: #4a4a46;
+    --ink-light: #8a8a84;
+    --ink-faint: #e8e6e0;
+    --surface: #f5f3ee;
+    --white: #fdfcf9;
+    --green: #1D9E75;
+    --green-light: #E1F5EE;
+    --green-dark: #0F6E56;
+    --amber: #BA7517;
+    --amber-light: #FAEEDA;
+    --red: #A32D2D;
+    --red-light: #FCEBEB;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--surface);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  header {
+    background: var(--ink);
+    color: var(--white);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .logo span {
+    color: #5DCAA5;
+  }
+
+  .header-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #8a8a84;
+    letter-spacing: 0.06em;
+  }
+
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: calc(100vh - 53px);
+  }
+
+  .panel {
+    padding: 28px 32px;
+    border-right: 1px solid var(--ink-faint);
+  }
+
+  .panel-right {
+    padding: 28px 32px;
+    background: var(--white);
+  }
+
+  .panel-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .panel-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--ink-faint);
+  }
+
+  textarea {
+    width: 100%;
+    height: 340px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--ink);
+    background: var(--white);
+    border: 1px solid var(--ink-faint);
+    border-radius: 4px;
+    padding: 14px 16px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  textarea:focus { border-color: var(--ink-mid); }
+  textarea::placeholder { color: var(--ink-light); }
+
+  .sample-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green-dark);
+    background: var(--green-light);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 6px;
+    transition: opacity 0.15s;
+  }
+  .sample-btn:hover { opacity: 0.8; }
+
+  .extract-btn {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px;
+    background: var(--ink);
+    color: var(--white);
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .extract-btn:hover { background: #2c2c2a; }
+  .extract-btn:disabled { background: var(--ink-light); cursor: not-allowed; }
+
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 380px;
+    color: var(--ink-light);
+    text-align: center;
+    gap: 12px;
+  }
+
+  .empty-icon {
+    width: 48px;
+    height: 48px;
+    border: 1.5px dashed var(--ink-faint);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .empty-state p {
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 200px;
+  }
+
+  .loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 380px;
+    gap: 16px;
+  }
+
+  .loading-bar {
+    width: 180px;
+    height: 3px;
+    background: var(--ink-faint);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .loading-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 2px;
+    animation: scan 1.2s ease-in-out infinite;
+  }
+
+  @keyframes scan {
+    0% { width: 0; margin-left: 0; }
+    50% { width: 60%; margin-left: 20%; }
+    100% { width: 0; margin-left: 100%; }
+  }
+
+  .loading-state p {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-light);
+    letter-spacing: 0.06em;
+  }
+
+  .result-block {
+    margin-bottom: 20px;
+  }
+
+  .result-section {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 8px;
+    margin-top: 18px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--ink-faint);
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 8px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--ink-faint);
+    align-items: baseline;
+  }
+
+  .field-row:last-child { border-bottom: none; }
+
+  .field-key {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-light);
+  }
+
+  .field-val {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink);
+    font-weight: 500;
+    word-break: break-word;
+  }
+
+  .field-val.missing {
+    color: var(--red);
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .line-items-table {
+    width: 100%;
+    font-family: var(--mono);
+    font-size: 11px;
+    border-collapse: collapse;
+    margin-top: 6px;
+  }
+
+  .line-items-table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--ink-light);
+    padding: 4px 6px;
+    border-bottom: 1px solid var(--ink-faint);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .line-items-table td {
+    padding: 6px 6px;
+    border-bottom: 1px solid var(--ink-faint);
+    color: var(--ink);
+    vertical-align: top;
+  }
+
+  .line-items-table tr:last-child td { border-bottom: none; }
+
+  .confidence-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  .conf-high { background: var(--green-light); color: var(--green-dark); }
+  .conf-medium { background: var(--amber-light); color: var(--amber); }
+  .conf-low { background: var(--red-light); color: var(--red); }
+
+  .flags-list {
+    list-style: none;
+    margin-top: 6px;
+  }
+
+  .flag-item {
+    font-size: 12px;
+    color: var(--amber);
+    background: var(--amber-light);
+    padding: 6px 10px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    font-family: var(--mono);
+    line-height: 1.5;
+  }
+
+  .flag-item::before { content: '⚠ '; }
+
+  .export-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--ink-faint);
+  }
+
+  .export-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 7px 14px;
+    background: transparent;
+    border: 1px solid var(--ink-faint);
+    border-radius: 3px;
+    cursor: pointer;
+    color: var(--ink-mid);
+    transition: all 0.15s;
+    letter-spacing: 0.04em;
+  }
+
+  .export-btn:hover { border-color: var(--ink-mid); color: var(--ink); }
+
+  .error-box {
+    background: var(--red-light);
+    border: 1px solid #F09595;
+    border-radius: 4px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--red);
+    margin-top: 16px;
+    font-family: var(--mono);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .main { grid-template-columns: 1fr; }
+    .panel { border-right: none; border-bottom: 1px solid var(--ink-faint); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Edge Core <span>Advisors</span></div>
+  <div class="header-tag">Order Entry — AI Extraction Demo v1.0</div>
+</header>
+
+<div class="main">
+  <div class="panel">
+    <div class="panel-label">Input — paste order email or text</div>
+
+    <textarea id="input" placeholder="Paste a customer order email here...
+
+Example:
+Hi, we'd like to order 3 cases of 5W-30 motor oil (SKU MO-530) and 2 boxes of oil filters (SKU OF-220). Please ship to 4400 Industrial Pkwy, Minneapolis MN 55413, attention: Dock Manager. Need by Friday. — Tom @ Lakeside Auto Supply"></textarea>
+
+    <div>
+      <button class="sample-btn" onclick="loadSample(1)">Sample 1 — standard order</button>
+      <button class="sample-btn" onclick="loadSample(2)">Sample 2 — messy email</button>
+      <button class="sample-btn" onclick="loadSample(3)">Sample 3 — partial info</button>
+    </div>
+
+    <button class="extract-btn" id="extract-btn" onclick="extract()">Extract Order Data →</button>
+  </div>
+
+  <div class="panel-right">
+    <div class="panel-label">Extracted output</div>
+    <div id="output">
+      <div class="empty-state">
+        <div class="empty-icon">→</div>
+        <p>Paste an order email and click extract to see structured data</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const samples = {
+  1: `Hi team,
+
+We'd like to place an order for the following items:
+
+- 10 units of Heavy-Duty Pallet Wrap (SKU: PW-1200), 20" x 1000ft rolls
+- 4 units of Stretch Film Dispenser (SKU: SFD-80)
+- 2 cases of Packing Tape, Clear, 2" x 110yd (SKU: PT-2110C), 36 rolls/case
+
+Please ship to:
+Northland Distribution Co.
+1850 Commerce Drive
+St. Paul, MN 55120
+Attn: Receiving Dept
+
+We need this by Thursday EOD if possible. PO# is NDC-2024-1187.
+
+Payment will be net-30 as usual.
+
+Thanks,
+Karen Olson
+Purchasing Manager
+Northland Distribution Co.
+651-555-0148`,
+
+  2: `hey its mike from Riverside Auto Parts again
+
+can u send us more of that stuff we ordered last time? we need like 20 of the floor dry absorbent (the big bags) and also 6 of the red shop rags (case of 50). oh and 3 of those blue drum funnels
+
+ship it to the usual place - 2201 Riverside Ave, Minneapolis. back dock entrance
+
+kinda urgent, we spilled something and running low. can u do tomorrow or day after?
+
+-mike
+cell 612-555-0192`,
+
+  3: `Good morning,
+
+Attached please find our purchase order for Q4 restocking. We require:
+
+Item 1: Corrugated Shipping Boxes, 12x10x8, qty 500
+Item 2: Bubble Wrap Roll 12" x 100ft, qty 24
+Item 3: Fragile stickers, 1000-count roll, qty 10
+
+Total estimated value approximately $640.
+
+Please confirm availability and lead time. Standard shipping is fine.
+
+Regards,
+Purchasing`
+};
+
+function loadSample(n) {
+  document.getElementById('input').value = samples[n];
+}
+
+function renderResult(data) {
+  const conf = (c) => {
+    if (!c) return '';
+    const cls = c === 'high' ? 'conf-high' : c === 'medium' ? 'conf-medium' : 'conf-low';
+    return `<span class="confidence-badge ${cls}">${c}</span>`;
+  };
+
+  const val = (v, fallback = '—') => {
+    if (!v || v === 'unknown' || v === 'not provided' || v === '') {
+      return `<span class="field-val missing">not found</span>`;
+    }
+    return `<span class="field-val">${v}</span>`;
+  };
+
+  let html = `<div class="result-block">`;
+
+  html += `<div class="result-section">Order header</div>`;
+  html += row('Customer name', data.customer_name);
+  html += row('Company', data.company);
+  html += row('Contact phone', data.contact_phone);
+  html += row('PO number', data.po_number);
+  html += row('Order date', data.order_date);
+  html += row('Requested delivery', data.requested_delivery);
+  html += row('Payment terms', data.payment_terms);
+
+  html += `<div class="result-section">Ship-to address</div>`;
+  if (data.ship_to) {
+    html += row('Street', data.ship_to.street);
+    html += row('City / State / ZIP', [data.ship_to.city, data.ship_to.state, data.ship_to.zip].filter(Boolean).join(', ') || null);
+    html += row('Attention', data.ship_to.attention);
+    html += row('Special instructions', data.ship_to.instructions);
+  }
+
+  html += `<div class="result-section">Line items</div>`;
+  if (data.line_items && data.line_items.length > 0) {
+    html += `<table class="line-items-table">
+      <thead><tr><th>#</th><th>Description</th><th>SKU</th><th>Qty</th><th>Unit</th></tr></thead>
+      <tbody>`;
+    data.line_items.forEach((item, i) => {
+      html += `<tr>
+        <td>${i + 1}</td>
+        <td>${item.description || '—'}</td>
+        <td>${item.sku || '—'}</td>
+        <td>${item.quantity || '—'}</td>
+        <td>${item.unit || '—'}</td>
+      </tr>`;
+    });
+    html += `</tbody></table>`;
+  } else {
+    html += `<p style="font-size:12px;color:var(--ink-light);font-family:var(--mono);padding:8px 0;">No line items found</p>`;
+  }
+
+  if (data.flags && data.flags.length > 0) {
+    html += `<div class="result-section">Flags & missing info</div>`;
+    html += `<ul class="flags-list">`;
+    data.flags.forEach(f => {
+      html += `<li class="flag-item">${f}</li>`;
+    });
+    html += `</ul>`;
+  }
+
+  html += `<div class="export-row">
+    <button class="export-btn" onclick="copyJSON()">Copy JSON</button>
+    <button class="export-btn" onclick="copyCSV()">Copy CSV</button>
+  </div>`;
+
+  html += `</div>`;
+
+  document.getElementById('output').innerHTML = html;
+  window._lastResult = data;
+}
+
+function row(label, value) {
+  const isEmpty = !value || value === 'unknown' || value === 'not provided' || value === '';
+  const valHtml = isEmpty
+    ? `<span class="field-val missing">not found</span>`
+    : `<span class="field-val">${value}</span>`;
+  return `<div class="field-row"><span class="field-key">${label}</span>${valHtml}</div>`;
+}
+
+async function extract() {
+  const input = document.getElementById('input').value.trim();
+  if (!input) {
+    alert('Paste an order email first.');
+    return;
+  }
+
+  const btn = document.getElementById('extract-btn');
+  btn.disabled = true;
+  btn.textContent = 'Extracting...';
+
+  document.getElementById('output').innerHTML = `
+    <div class="loading-state">
+      <div class="loading-bar"><div class="loading-fill"></div></div>
+      <p>Reading order...</p>
+    </div>`;
+
+  try {
+    const response = await fetch('/.netlify/functions/extract', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: input })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error?.message || 'API error');
+    }
+
+    const text = data.content[0].text.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(text);
+    renderResult(parsed);
+
+  } catch (err) {
+    document.getElementById('output').innerHTML = `<div class="error-box">Error: ${err.message}<br><br>Check your connection and try again.</div>`;
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Extract Order Data →';
+}
+
+function copyJSON() {
+  if (!window._lastResult) return;
+  navigator.clipboard.writeText(JSON.stringify(window._lastResult, null, 2));
+  alert('JSON copied to clipboard');
+}
+
+function copyCSV() {
+  if (!window._lastResult || !window._lastResult.line_items) return;
+  const rows = [['Description','SKU','Quantity','Unit']];
+  window._lastResult.line_items.forEach(i => {
+    rows.push([i.description || '', i.sku || '', i.quantity || '', i.unit || '']);
+  });
+  const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+  navigator.clipboard.writeText(csv);
+  alert('CSV copied to clipboard');
+}
+</script>
+</body>
+</html>
