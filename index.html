@@ -1,30 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edge Core Advisors — AI Workflow Consulting</title>
+<title>Edge Core Advisors — Fractional Infrastructure Advisory</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --ink:#0f0f0d;
-  --ink-80:#2a2a26;
-  --ink-50:#767670;
-  --ink-20:#d8d6ce;
-  --ink-08:#f0ede6;
-  --white:#fdfcf8;
-  --green:#1D9E75;
-  --green-dark:#0F6E56;
-  --green-pale:#E1F5EE;
-  --mono:'IBM Plex Mono',monospace;
-  --cond:'Barlow Condensed',sans-serif;
-  --body:'Barlow',sans-serif;
+  --ink:#0f0f0d;--ink-80:#2a2a26;--ink-50:#767670;--ink-20:#d8d6ce;--ink-08:#f0ede6;
+  --white:#fdfcf8;--green:#1D9E75;--green-dark:#0F6E56;--green-pale:#E1F5EE;
+  --mono:'IBM Plex Mono',monospace;--cond:'Barlow Condensed',sans-serif;--body:'Barlow',sans-serif;
 }
 html{scroll-behavior:smooth}
 body{font-family:var(--body);background:var(--white);color:var(--ink);overflow-x:hidden}
-
-/* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(253,252,248,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--ink-20)}
 .nav-logo{font-family:var(--cond);font-size:17px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);text-decoration:none}
 .nav-logo span{color:var(--green)}
@@ -32,9 +22,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:60px;d
 .nav-links a{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-50);text-decoration:none;transition:color 0.15s}
 .nav-links a:hover{color:var(--ink)}
 .nav-cta{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;background:var(--ink);color:var(--white);padding:8px 18px;border-radius:2px;text-decoration:none;transition:background 0.15s}
-.nav-cta:hover{background:var(--ink-80)}
-
-/* ── HERO ── */
+.nav-cta:hover{background:var(--green)}
 .hero{padding:160px 40px 100px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:center}
 .hero-tag{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin-bottom:24px;display:flex;align-items:center;gap:10px}
 .hero-tag::before{content:'';display:inline-block;width:24px;height:1px;background:var(--green)}
@@ -43,7 +31,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:60px;d
 .hero-sub{font-size:17px;font-weight:300;line-height:1.7;color:var(--ink-80);max-width:480px;margin-bottom:40px}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
 .btn-primary{font-family:var(--mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;background:var(--ink);color:var(--white);padding:14px 28px;border-radius:2px;text-decoration:none;transition:background 0.15s}
-.btn-primary:hover{background:var(--ink-80)}
+.btn-primary:hover{background:var(--green)}
 .btn-secondary{font-family:var(--mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;background:transparent;color:var(--ink);padding:14px 28px;border-radius:2px;border:1px solid var(--ink-20);text-decoration:none;transition:all 0.15s}
 .btn-secondary:hover{border-color:var(--ink);background:var(--ink-08)}
 .hero-stat-box{background:var(--ink);border-radius:4px;padding:40px;color:var(--white)}
@@ -53,22 +41,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:60px;d
 .stat-num{font-family:var(--cond);font-size:52px;font-weight:700;line-height:1;color:var(--green);letter-spacing:-0.02em}
 .stat-label{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:4px}
 .stat-desc{font-size:13px;color:rgba(255,255,255,0.7);margin-top:6px;line-height:1.5}
-
-/* ── MARQUEE ── */
 .marquee-wrap{border-top:1px solid var(--ink-20);border-bottom:1px solid var(--ink-20);padding:14px 0;overflow:hidden;background:var(--ink-08)}
-.marquee-track{display:flex;gap:0;white-space:nowrap;animation:scroll 28s linear infinite}
+.marquee-track{display:flex;gap:0;white-space:nowrap;animation:scroll 32s linear infinite}
 .marquee-item{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-50);padding:0 32px;display:flex;align-items:center;gap:32px}
 .marquee-item::after{content:'·';color:var(--green)}
 @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* ── SECTIONS COMMON ── */
 section{padding:100px 40px}
 .section-inner{max-width:1100px;margin:0 auto}
 .section-tag{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin-bottom:16px;display:flex;align-items:center;gap:10px}
 .section-tag::before{content:'';display:inline-block;width:24px;height:1px;background:var(--green)}
 .section-h{font-family:var(--cond);font-size:clamp(36px,5vw,56px);font-weight:700;line-height:1;letter-spacing:-0.01em;text-transform:uppercase;color:var(--ink);margin-bottom:24px}
-
-/* ── PROBLEM ── */
 .problem{background:var(--ink-08)}
 .problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:60px}
 .problem-list{list-style:none;display:flex;flex-direction:column;gap:0}
@@ -82,22 +64,20 @@ section{padding:100px 40px}
 .proof-card .num{font-family:var(--cond);font-size:72px;font-weight:700;line-height:1;color:var(--green);letter-spacing:-0.02em}
 .proof-card .num-label{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-50);margin-bottom:20px}
 .proof-card p{font-size:14px;color:var(--ink-80);line-height:1.7;border-top:1px solid var(--ink-20);padding-top:20px}
-
-/* ── SERVICES ── */
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;border:2px solid var(--ink-20)}
-.service-card{padding:36px 32px;background:var(--white);border-right:1px solid var(--ink-20);transition:background 0.2s}
+.service-card{padding:36px 32px;background:var(--white);border-right:1px solid var(--ink-20);transition:background 0.2s;display:flex;flex-direction:column}
 .service-card:last-child{border-right:none}
 .service-card:hover{background:var(--ink-08)}
 .service-num{font-family:var(--mono);font-size:11px;color:var(--ink-50);letter-spacing:0.1em;margin-bottom:20px}
 .service-icon{width:40px;height:40px;background:var(--green-pale);border-radius:2px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
 .service-icon svg{width:20px;height:20px;stroke:var(--green-dark);fill:none;stroke-width:1.5}
 .service-card h3{font-family:var(--cond);font-size:22px;font-weight:600;text-transform:uppercase;letter-spacing:0.02em;color:var(--ink);margin-bottom:12px}
-.service-card p{font-size:14px;color:var(--ink-50);line-height:1.7;margin-bottom:20px}
-.service-tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;border-radius:2px}
+.service-card p{font-size:14px;color:var(--ink-50);line-height:1.7;margin-bottom:20px;flex:1}
+.service-detail{list-style:none;margin-bottom:20px;display:flex;flex-direction:column;gap:6px}
+.service-detail li{font-family:var(--mono);font-size:11px;color:var(--ink-50);padding-left:14px;position:relative}
+.service-detail li::before{content:'—';position:absolute;left:0;color:var(--green)}
+.service-tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;border-radius:2px;margin-top:auto}
 .tag-live{background:var(--green-pale);color:var(--green-dark)}
-.tag-soon{background:var(--ink-08);color:var(--ink-50)}
-
-/* ── HOW IT WORKS ── */
 .how{background:var(--ink)}
 .how .section-h{color:var(--white)}
 .how .section-tag{color:#5DCAA5}
@@ -108,8 +88,6 @@ section{padding:100px 40px}
 .step-num{width:56px;height:56px;border-radius:50%;border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;color:var(--green);margin:0 auto 24px;background:var(--ink);position:relative;z-index:1}
 .step h4{font-family:var(--cond);font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--white);margin-bottom:10px}
 .step p{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7}
-
-/* ── ABOUT ── */
 .about-grid{display:grid;grid-template-columns:1fr 360px;gap:80px;align-items:start;margin-top:60px}
 .about-body p{font-size:16px;color:var(--ink-80);line-height:1.8;margin-bottom:20px}
 .about-body p:last-child{margin-bottom:0}
@@ -117,22 +95,12 @@ section{padding:100px 40px}
 .cred-item{background:var(--ink-08);border-left:3px solid var(--green);padding:16px 20px}
 .cred-item strong{display:block;font-size:14px;font-weight:500;color:var(--ink);margin-bottom:4px}
 .cred-item span{font-size:13px;color:var(--ink-50)}
-
-/* ── DEMO ── */
-.demo{background:var(--ink-08);border-top:1px solid var(--ink-20)}
-.demo-wrap{display:grid;grid-template-columns:380px 1fr;gap:60px;align-items:center;margin-top:60px}
-.demo-copy p{font-size:16px;color:var(--ink-80);line-height:1.8;margin-bottom:16px}
-.demo-copy ul{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:10px}
-.demo-copy li{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink-80)}
-.demo-copy li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0}
-.demo-frame{background:var(--ink);border-radius:4px;padding:24px;font-family:var(--mono)}
-.demo-bar{display:flex;gap:6px;margin-bottom:20px}
-.demo-dot{width:10px;height:10px;border-radius:50%}
-.demo-input{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:3px;padding:16px;font-size:11px;color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:12px}
-.demo-output{background:rgba(29,158,117,0.12);border:1px solid rgba(29,158,117,0.3);border-radius:3px;padding:16px;font-size:11px;color:#5DCAA5;line-height:1.9}
-.demo-output .key{color:rgba(255,255,255,0.4)}
-
-/* ── CTA ── */
+.ai-soon{background:var(--ink);padding:60px 40px}
+.ai-soon-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center}
+.ai-soon-badge{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;background:rgba(29,158,117,0.15);color:#5DCAA5;border:1px solid rgba(29,158,117,0.3);padding:5px 12px;border-radius:2px;display:inline-block;margin-bottom:16px}
+.ai-soon h3{font-family:var(--cond);font-size:clamp(24px,3vw,36px);font-weight:700;text-transform:uppercase;letter-spacing:-0.01em;color:var(--white);margin-bottom:12px}
+.ai-soon p{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.7;max-width:560px}
+.ai-soon-cta{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.1);padding:20px 24px;border-radius:2px;white-space:nowrap;text-align:center;line-height:1.8}
 .cta{background:var(--green);padding:80px 40px;text-align:center}
 .cta h2{font-family:var(--cond);font-size:clamp(36px,5vw,60px);font-weight:700;text-transform:uppercase;letter-spacing:-0.01em;color:var(--white);margin-bottom:20px}
 .cta p{font-size:17px;color:rgba(255,255,255,0.85);margin-bottom:40px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7}
@@ -141,8 +109,6 @@ section{padding:100px 40px}
 .btn-white:hover{opacity:0.9}
 .btn-outline-white{font-family:var(--mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;background:transparent;color:var(--white);padding:14px 28px;border-radius:2px;border:1px solid rgba(255,255,255,0.5);text-decoration:none;transition:border-color 0.15s}
 .btn-outline-white:hover{border-color:var(--white)}
-
-/* ── FOOTER ── */
 footer{background:var(--ink);padding:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
 .footer-logo{font-family:var(--cond);font-size:15px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--white)}
 .footer-logo span{color:var(--green)}
@@ -150,23 +116,23 @@ footer{background:var(--ink);padding:40px;display:flex;align-items:center;justif
 .footer-links a{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.15s}
 .footer-links a:hover{color:rgba(255,255,255,0.8)}
 .footer-copy{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.3)}
-
-/* ── ANIMATIONS ── */
 .fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
 .fade-up.visible{opacity:1;transform:translateY(0)}
-
 @media(max-width:900px){
   .hero{grid-template-columns:1fr;padding:120px 24px 60px}
   .hero-stat-box{display:grid;grid-template-columns:repeat(3,1fr)}
   .stat-row{border-bottom:none;border-right:1px solid rgba(255,255,255,0.1);padding:16px}
   .stat-row:last-child{border-right:none}
-  .problem-grid,.about-grid,.demo-wrap{grid-template-columns:1fr}
+  .problem-grid,.about-grid{grid-template-columns:1fr}
   .services-grid{grid-template-columns:1fr}
   .service-card{border-right:none;border-bottom:1px solid var(--ink-20)}
   .steps{grid-template-columns:1fr 1fr;gap:40px}
   .steps::before{display:none}
+  .ai-soon-inner{grid-template-columns:1fr}
+  .ai-soon-cta{display:none}
   section{padding:60px 24px}
   nav{padding:0 24px}
+  .ai-soon{padding:40px 24px}
 }
 </style>
 </head>
@@ -177,131 +143,133 @@ footer{background:var(--ink);padding:40px;display:flex;align-items:center;justif
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#demo">Demo</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Let's Talk</a>
+  <a href="https://bookings.cloud.microsoft/bookwithme/user/dbe96eff0ed64766b912b1ae62a92831%40edgecoreadvisors.com?anonymous&ismsaljsauthenabled&ep=email" target="_blank" class="nav-cta">Schedule a Call</a>
 </nav>
 
-<!-- HERO -->
 <section style="padding:0">
   <div class="hero">
     <div>
-      <div class="hero-tag">AI Workflow Consulting</div>
-      <h1>Cut the<br><em>Manual</em><br>Work.</h1>
-      <p class="hero-sub">We help logistics, distribution, and retail operations teams eliminate the repetitive manual processes eating hours every week — using AI that actually works in the real world.</p>
+      <div class="hero-tag">Fractional Infrastructure Advisory</div>
+      <h1>Build the<br>Infrastructure<br>That <em>Scales.</em></h1>
+      <p class="hero-sub">Mid-market operators in retail, logistics, supply chain, and healthcare hire me to fix infrastructure programs that are behind schedule, over budget, or built for where the business was — not where it's going.</p>
       <div class="hero-btns">
-        <a href="#contact" class="btn-primary">Start a Conversation</a>
-        <a href="#demo" class="btn-secondary">See a Live Demo</a>
+        <a href="https://bookings.cloud.microsoft/bookwithme/user/dbe96eff0ed64766b912b1ae62a92831%40edgecoreadvisors.com?anonymous&ismsaljsauthenabled&ep=email" target="_blank" class="btn-primary">Schedule a 30-Minute Call</a>
+        <a href="#services" class="btn-secondary">How I Engage</a>
       </div>
     </div>
     <div class="hero-stat-box fade-up">
       <div class="stat-row">
         <div class="stat-num">73%</div>
-        <div class="stat-label">Faster deployment</div>
-        <div class="stat-desc">Network overhaul program compressed from 30 months to 8 months per site</div>
+        <div class="stat-label">Faster completion</div>
+        <div class="stat-desc">Network overhaul compressed from 30 months to 8 months per site</div>
       </div>
       <div class="stat-row">
-        <div class="stat-num">96%</div>
-        <div class="stat-label">Time reduction</div>
-        <div class="stat-desc">Infrastructure validation: 4 hours of manual work down to under 15 minutes</div>
+        <div class="stat-num">37%</div>
+        <div class="stat-label">Per-site cost reduction</div>
+        <div class="stat-desc">Same scope, lower cost — across a legacy portfolio of distributed locations</div>
       </div>
       <div class="stat-row">
         <div class="stat-num">25yr</div>
         <div class="stat-label">Ops experience</div>
-        <div class="stat-desc">Enterprise retail, supply chain & distribution at scale</div>
+        <div class="stat-desc">$100M+ capital programs across retail, supply chain & distribution at scale</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <span class="marquee-item">Order Entry Automation</span>
-    <span class="marquee-item">Manual Process Elimination</span>
-    <span class="marquee-item">Logistics & Distribution</span>
-    <span class="marquee-item">AI Workflow Design</span>
-    <span class="marquee-item">Retail Operations</span>
-    <span class="marquee-item">Supply Chain Technology</span>
-    <span class="marquee-item">Time Savings You Can Measure</span>
-    <span class="marquee-item">Order Entry Automation</span>
-    <span class="marquee-item">Manual Process Elimination</span>
-    <span class="marquee-item">Logistics & Distribution</span>
-    <span class="marquee-item">AI Workflow Design</span>
-    <span class="marquee-item">Retail Operations</span>
-    <span class="marquee-item">Supply Chain Technology</span>
-    <span class="marquee-item">Time Savings You Can Measure</span>
+    <span class="marquee-item">Fractional Infrastructure Advisory</span>
+    <span class="marquee-item">Capital Program Execution</span>
+    <span class="marquee-item">Network Modernization</span>
+    <span class="marquee-item">Vendor Accountability</span>
+    <span class="marquee-item">Retail &amp; Logistics</span>
+    <span class="marquee-item">Supply Chain Infrastructure</span>
+    <span class="marquee-item">PE-Backed Operations</span>
+    <span class="marquee-item">Fractional Infrastructure Advisory</span>
+    <span class="marquee-item">Capital Program Execution</span>
+    <span class="marquee-item">Network Modernization</span>
+    <span class="marquee-item">Vendor Accountability</span>
+    <span class="marquee-item">Retail &amp; Logistics</span>
+    <span class="marquee-item">Supply Chain Infrastructure</span>
+    <span class="marquee-item">PE-Backed Operations</span>
   </div>
 </div>
 
-<!-- PROBLEM -->
 <section class="problem" id="problem">
   <div class="section-inner">
     <div class="section-tag">The Problem</div>
-    <h2 class="section-h">Where Your Team<br>Loses the Day</h2>
+    <h2 class="section-h">Three Problems<br>Most Organizations<br>Don't Catch in Time</h2>
     <div class="problem-grid">
       <ul class="problem-list fade-up">
         <li class="problem-item">
           <span class="p-icon">01</span>
           <div class="p-text">
-            <strong>Order entry by hand</strong>
-            <span>Someone copies data from customer emails and PDFs into your ERP or spreadsheet, every single day.</span>
+            <strong>The program is behind and over budget</strong>
+            <span>A technology initiative that started with a clear plan has stalled — schedule slipping, costs climbing, no one with authority to course-correct.</span>
           </div>
         </li>
         <li class="problem-item">
           <span class="p-icon">02</span>
           <div class="p-text">
-            <strong>End-of-shift inventory counts</strong>
-            <span>Manual counting, recounting, and spreadsheet updates that could be automated and verified in minutes.</span>
+            <strong>Infrastructure built for where you were</strong>
+            <span>The network, the systems, the architecture — designed for the business two years ago. Now you're scaling and it's showing cracks under load.</span>
           </div>
         </li>
         <li class="problem-item">
           <span class="p-icon">03</span>
           <div class="p-text">
-            <strong>Reporting that takes all morning</strong>
-            <span>Pulling numbers from three different places, formatting them, and sending the same report every week.</span>
+            <strong>Vendors costing more than they deliver</strong>
+            <span>Contracts that made sense at signing now feel misaligned. Escalation paths don't work. Accountability has eroded. Enterprise rates, mid-market results.</span>
           </div>
         </li>
         <li class="problem-item">
           <span class="p-icon">04</span>
           <div class="p-text">
-            <strong>Chasing shipment status</strong>
-            <span>Logging into multiple carrier portals, copying tracking info, responding to the same "where's my order?" questions.</span>
+            <strong>No internal expertise to assess the risk</strong>
+            <span>Aging infrastructure with no one on staff who can tell you how bad it actually is — or build a credible remediation plan with real cost estimates.</span>
           </div>
         </li>
         <li class="problem-item">
           <span class="p-icon">05</span>
           <div class="p-text">
-            <strong>Route planning in spreadsheets</strong>
-            <span>Building driver routes by hand or with static tools that don't adapt when orders change.</span>
+            <strong>Post-acquisition technology chaos</strong>
+            <span>PE-backed growth means inherited infrastructure from acquired businesses — inconsistent, undocumented, and carrying risk that hasn't been assessed.</span>
           </div>
         </li>
       </ul>
       <div class="problem-right fade-up">
         <div class="proof-card">
-          <div class="num">15<span style="font-size:32px">min</span></div>
-          <div class="num-label">Down from 4 hours</div>
-          <p>At a 2M sq ft distribution center, infrastructure acceptance testing required 4+ hours of manual validation per site — checking thousands of cable drops and fiber runs by hand. We rebuilt it as an automated workflow. Same accuracy, 96% less time, repeatable across every future site.</p>
-          <p style="margin-top:16px;font-style:italic;color:var(--ink-50);font-size:13px">That's the pattern we apply to your operations.</p>
+          <div class="num">12<span style="font-size:32px">–18</span></div>
+          <div class="num-label">Months typically lost</div>
+          <p>By the time most organizations recognize an infrastructure program is in trouble, they've already lost 12–18 months and significant capital. The work I do is designed to stop that clock — and in most cases, reverse it.</p>
+          <p style="margin-top:16px;font-style:italic;color:var(--ink-50);font-size:13px">Infrastructure failures at the mid-market level are rarely technical problems. They are program management, vendor accountability, and strategic alignment problems that compound until they become operational crises.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
 <section id="services">
   <div class="section-inner">
-    <div class="section-tag">Services</div>
-    <h2 class="section-h">What We Do</h2>
+    <div class="section-tag">Engagements</div>
+    <h2 class="section-h">How I Work<br>With Clients</h2>
     <div class="services-grid fade-up">
       <div class="service-card">
         <div class="service-num">01</div>
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
         </div>
-        <h3>Order Entry<br>Automation</h3>
-        <p>Stop re-keying order data from emails and PDFs. AI extracts customer, address, line items, and quantities — structured and ready for your system.</p>
+        <h3>Infrastructure<br>Audit &amp; Roadmap</h3>
+        <p>A focused 4–8 week engagement that produces an honest assessment of your current infrastructure state, your critical risks, and a prioritized roadmap with clear ownership and cost estimates.</p>
+        <ul class="service-detail">
+          <li>Fixed fee. Defined deliverable.</li>
+          <li>Current state assessment</li>
+          <li>Risk identification &amp; prioritization</li>
+          <li>Roadmap with cost estimates</li>
+        </ul>
         <span class="service-tag tag-live">Available now</span>
       </div>
       <div class="service-card">
@@ -309,8 +277,14 @@ footer{background:var(--ink);padding:40px;display:flex;align-items:center;justif
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
         </div>
-        <h3>AI Workflow<br>Audit</h3>
-        <p>A focused assessment of your operations to identify the top 3 manual processes where AI can deliver measurable time savings within 90 days.</p>
+        <h3>Strategic<br>Advisory Retainer</h3>
+        <p>Ongoing fractional engagement, typically 2–4 days per month. Your infrastructure strategy partner — available for vendor negotiations, program reviews, board-level risk conversations, and critical decisions.</p>
+        <ul class="service-detail">
+          <li>Monthly retainer. No long-term commitment.</li>
+          <li>Vendor negotiation support</li>
+          <li>Program &amp; risk reviews</li>
+          <li>Board-level advisory</li>
+        </ul>
         <span class="service-tag tag-live">Available now</span>
       </div>
       <div class="service-card">
@@ -318,55 +292,59 @@ footer{background:var(--ink);padding:40px;display:flex;align-items:center;justif
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
         </div>
-        <h3>Custom<br>Workflow Build</h3>
-        <p>End-to-end design and deployment of a specific AI-powered workflow for your team — from scoping through implementation and training.</p>
-        <span class="service-tag tag-soon">Coming soon</span>
+        <h3>Program Execution<br>Leadership</h3>
+        <p>For organizations that need more than advice. I embed as a fractional infrastructure program leader, owning delivery accountability for a defined initiative — network modernization, facility buildout, vendor transition.</p>
+        <ul class="service-detail">
+          <li>Scoped by program, not by hours.</li>
+          <li>Embedded delivery ownership</li>
+          <li>Vendor &amp; contractor management</li>
+          <li>Milestone accountability</li>
+        </ul>
+        <span class="service-tag tag-live">Available now</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
 <section class="how">
   <div class="section-inner">
     <div class="section-tag">Process</div>
-    <h2 class="section-h">How It Works</h2>
+    <h2 class="section-h">How Every<br>Engagement Starts</h2>
     <div class="steps fade-up">
       <div class="step">
         <div class="step-num">01</div>
-        <h4>Identify</h4>
-        <p>We map your current manual workflows and find where time is actually being lost — not where you think it is.</p>
+        <h4>30-Min Call</h4>
+        <p>An honest conversation about your current situation. No pitch. No proposal. Just clarity on what you're dealing with and whether I'm the right person to help.</p>
       </div>
       <div class="step">
         <div class="step-num">02</div>
-        <h4>Scope</h4>
-        <p>We define a specific, bounded problem — one that can be solved in weeks, not months, with results you can measure.</p>
+        <h4>Assess</h4>
+        <p>If there's a fit, I take a hard look at the actual state of the program or infrastructure — not the version in the deck, the version in the field.</p>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <h4>Build</h4>
-        <p>We design and deploy the workflow — tested against your real data, not demo scenarios.</p>
+        <h4>Scope</h4>
+        <p>We define a specific, bounded engagement — clear deliverables, a fixed timeline, and a price that reflects the work. Not an open-ended retainer with vague outputs.</p>
       </div>
       <div class="step">
         <div class="step-num">04</div>
-        <h4>Measure</h4>
-        <p>We track the time saved and the error rate. If it's not better, we fix it.</p>
+        <h4>Execute</h4>
+        <p>I do the work. You get a roadmap, a negotiation outcome, or a program back on track. If I can't help, I'll tell you that — and point you to someone who can.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="section-inner">
     <div class="section-tag">About</div>
-    <h2 class="section-h">Built on 25 Years<br>of Ops Reality</h2>
+    <h2 class="section-h">Built on 25 Years<br>of Program Reality</h2>
     <div class="about-grid">
       <div class="about-body fade-up">
-        <p>Edge Core Advisors was founded by Paul Byrnes after a 25-year career at Target Corporation — building and running infrastructure at a scale most businesses will never encounter. 2,000+ store locations. 50+ distribution centers. $100M+ capital programs.</p>
-        <p>That career was a long lesson in one thing: the gap between what technology can do and what operations teams are actually using it for. Most of the time savings we found at enterprise scale came from replacing manual work that nobody had gotten around to automating yet.</p>
-        <p>That gap is even wider at small and mid-size businesses — and the tools to close it have never been more accessible. That's what Edge Core does.</p>
-        <p>We don't sell AI strategy decks. We find the specific manual process costing your team the most time and we fix it.</p>
+        <p>Edge Core Advisors was founded by Paul Byrnes after a 25-year career at Target Corporation — directing infrastructure programs at a scale most organizations will never encounter. 2,000+ store locations. 50+ distribution centers. $100M+ capital programs executed on time and on budget.</p>
+        <p>That career produced one hard-won insight: infrastructure failures at the mid-market level are almost never technical problems. They are program management problems, vendor accountability problems, and strategic alignment problems that compound until they become operational crises.</p>
+        <p>The organizations I work with have distributed physical operations, real infrastructure stakes, and no internal bench deep enough to lead a complex program. That's the gap Edge Core was built to close.</p>
+        <p>I work with a small number of clients at any given time. Every engagement begins with a 30-minute conversation about your situation — no pitch, no proposal, just an honest exchange about what you're dealing with and whether I'm the right fit.</p>
       </div>
       <div class="credentials fade-up">
         <div class="cred-item">
@@ -386,64 +364,35 @@ footer{background:var(--ink);padding:40px;display:flex;align-items:center;justif
           <span>Purpose-built for WAN redundancy at Target scale, with Verizon</span>
         </div>
         <div class="cred-item">
+          <strong>73% program compression</strong>
+          <span>Network overhaul: 30 months to 8 months per site, 37% per-site cost reduction</span>
+        </div>
+        <div class="cred-item">
           <strong>Victoria, MN</strong>
-          <span>Serving SMBs in the Twin Cities and nationally</span>
+          <span>Serving mid-market operators in the Twin Cities and nationally</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DEMO -->
-<section class="demo" id="demo">
-  <div class="section-inner">
-    <div class="section-tag">Live Demo</div>
-    <h2 class="section-h">See It in Action</h2>
-    <div class="demo-wrap">
-      <div class="demo-copy fade-up">
-        <p>Paste any customer order email — clean or messy — and our AI extracts the full structured order in seconds.</p>
-        <p>No templates. No training data. Works on the first try with real emails your customers are already sending.</p>
-        <ul>
-          <li>Customer name & company</li>
-          <li>Ship-to address & delivery instructions</li>
-          <li>Line items, SKUs, quantities & units</li>
-          <li>PO number, delivery date, payment terms</li>
-          <li>Flags for missing info that would block fulfillment</li>
-        </ul>
-        <div style="margin-top:32px">
-          <a href="order-entry-demo.html" class="btn-primary" target="_blank">Try the Demo →</a>
-        </div>
-      </div>
-      <div class="demo-frame fade-up">
-        <div class="demo-bar">
-          <div class="demo-dot" style="background:#ff5f57"></div>
-          <div class="demo-dot" style="background:#febc2e"></div>
-          <div class="demo-dot" style="background:#28c840"></div>
-        </div>
-        <div class="demo-input">Hi, we need 10 units of Heavy-Duty Pallet Wrap<br>(SKU: PW-1200) and 4 Stretch Film Dispensers<br>(SKU: SFD-80). Ship to Northland Distribution,<br>1850 Commerce Drive, St. Paul MN 55120.<br>PO# NDC-2024-1187. Need by Thursday EOD.<br>— Karen Olson, Purchasing</div>
-        <div class="demo-output">
-<span class="key">customer_name  </span>Karen Olson<br>
-<span class="key">company        </span>Northland Distribution<br>
-<span class="key">po_number      </span>NDC-2024-1187<br>
-<span class="key">delivery       </span>Thursday EOD<br>
-<span class="key">ship_to        </span>1850 Commerce Drive<br>
-<span class="key">               </span>St. Paul, MN 55120<br>
-<span class="key">line_items[0]  </span>Pallet Wrap PW-1200 × 10<br>
-<span class="key">line_items[1]  </span>Film Dispenser SFD-80 × 4<br>
-<span class="key">flags          </span>[ ] Payment terms not specified
-        </div>
-      </div>
+<div class="ai-soon">
+  <div class="ai-soon-inner">
+    <div>
+      <div class="ai-soon-badge">Coming Soon</div>
+      <h3>AI Workflow Automation</h3>
+      <p>Edge Core is building a practice around eliminating manual operational processes — order entry, inventory validation, reporting — using AI that works in the real world. Early conversations are open.</p>
     </div>
+    <div class="ai-soon-cta">In development<br>Est. 2026</div>
   </div>
-</section>
+</div>
 
-<!-- CTA -->
 <section class="cta" id="contact" style="padding:80px 40px">
-  <h2>Ready to Lose the<br>Manual Work?</h2>
-  <p>Tell us what your team is doing by hand. If it's automatable, we'll show you what that looks like — no commitment required.</p>
+  <h2>Let's Talk About<br>Your Infrastructure.</h2>
+  <p>Every engagement starts with a 30-minute conversation. Tell me what you're dealing with — I'll tell you honestly whether I can help.</p>
   <div class="cta-btns">
-    <a href="mailto:paul.byrnes2190@outlook.com" class="btn-white">Send an Email</a>
-    <a href="https://linkedin.com/in/" class="btn-outline-white">Connect on LinkedIn</a>
+    <a href="https://bookings.cloud.microsoft/bookwithme/user/dbe96eff0ed64766b912b1ae62a92831%40edgecoreadvisors.com?anonymous&ismsaljsauthenabled&ep=email" target="_blank" class="btn-white">Schedule a 30-Minute Call</a>
+    <a href="mailto:paul@edgecoreadvisors.com" class="btn-outline-white">Send an Email</a>
   </div>
 </section>
 
@@ -452,10 +401,10 @@ footer{background:var(--ink);padding:40px;display:flex;align-items:center;justif
   <div class="footer-links">
     <a href="#services">Services</a>
     <a href="#about">About</a>
-    <a href="#demo">Demo</a>
-    <a href="mailto:paul.byrnes2190@outlook.com">Contact</a>
+    <a href="#contact">Contact</a>
+    <a href="mailto:paul@edgecoreadvisors.com">paul@edgecoreadvisors.com</a>
   </div>
-  <div class="footer-copy">© 2025 Edge Core Advisors, LLC</div>
+  <div class="footer-copy">&copy; 2025 Edge Core Advisors, LLC</div>
 </footer>
 
 <script>
